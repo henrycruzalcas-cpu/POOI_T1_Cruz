@@ -27,7 +27,7 @@ jobs:
           New-Item -ItemType Directory -Force "$env:RUNNER_TEMP\t2-pruebas" | Out-Null
           $salida = "$env:RUNNER_TEMP\t2-pruebas"
           Copy-Item "POOI_T2_CruzAlcas\bin\Newtonsoft.Json.dll" $salida
-          & "$env:WINDIR\Microsoft.NET\Framework64\v4.0.30319\csc.exe" /nologo /target:exe "/out:$salida\PruebasJson.exe" /r:System.ComponentModel.DataAnnotations.dll "/r:$salida\Newtonsoft.Json.dll" Auditoria/PruebasJson.cs POOI_T2_CruzAlcas/Models/Alumno.cs POOI_T2_CruzAlcas/Services/AlumnoJsonStore.cs
+          & "$env:WINDIR\Microsoft.NET\Framework64\v4.0.30319\csc.exe" /nologo /target:exe "/out:$salida\PruebasJson.exe" /r:System.ComponentModel.DataAnnotations.dll "/r:$salida\Newtonsoft.Json.dll" "$pwd\Auditoria\PruebasJson.cs" "$pwd\POOI_T2_CruzAlcas\Models\Alumno.cs" "$pwd\POOI_T2_CruzAlcas\Services\AlumnoJsonStore.cs"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           & "$salida\PruebasJson.exe"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
