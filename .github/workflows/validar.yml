@@ -1,0 +1,33 @@
+name: Validar T2
+on:
+  push:
+    branches: [entrega-t2]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verificar:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: microsoft/setup-msbuild@v2
+      - uses: NuGet/setup-nuget@v2
+      - name: Restaurar paquetes
+        run: nuget restore POOI_T2_CruzAlcas.sln -NonInteractive
+      - name: Compilar proyecto
+        run: msbuild POOI_T2_CruzAlcas.sln /p:Configuration=Release /verbosity:minimal
+      - name: Compilar vistas Razor
+        shell: pwsh
+        run: |
+          & "$env:WINDIR\Microsoft.NET\Framework64\v4.0.30319\aspnet_compiler.exe" -v / -p "$pwd\POOI_T2_CruzAlcas" -f "$env:RUNNER_TEMP\t2-precompilado"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Verificar operaciones JSON
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force "$env:RUNNER_TEMP\t2-pruebas" | Out-Null
+          $salida = "$env:RUNNER_TEMP\t2-pruebas"
+          Copy-Item "POOI_T2_CruzAlcas\bin\Newtonsoft.Json.dll" $salida
+          & "$env:WINDIR\Microsoft.NET\Framework64\v4.0.30319\csc.exe" /nologo /target:exe "/out:$salida\PruebasJson.exe" /r:System.ComponentModel.DataAnnotations.dll "/r:$salida\Newtonsoft.Json.dll" Auditoria/PruebasJson.cs POOI_T2_CruzAlcas/Models/Alumno.cs POOI_T2_CruzAlcas/Services/AlumnoJsonStore.cs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & "$salida\PruebasJson.exe"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

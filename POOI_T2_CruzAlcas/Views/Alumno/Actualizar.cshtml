@@ -1,0 +1,13 @@
+@model POOI_T2_CruzAlcas.Models.Alumno
+@{ ViewBag.Title = "Actualizar alumno"; }
+<a class="back" href="@Url.Action("Index")">← Volver al listado</a>
+<section class="heading"><div><p class="eyebrow">EDITAR REGISTRO</p><h1>Actualizar alumno</h1><p class="muted">Modifica los datos. El DNI no puede pertenecer a otro alumno.</p></div></section>
+<section class="card form-card">
+    @using (Html.BeginForm("Actualizar", "Alumno", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="dniOriginal" value="@ViewBag.DniOriginal" />
+        @Html.Partial("_Formulario", Model)
+        <div class="form-actions"><button type="submit" class="button primary">Guardar cambios</button><a class="button secondary" href="@Url.Action("Index")">Cancelar</a></div>
+    }
+</section>

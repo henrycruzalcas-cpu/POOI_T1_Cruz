@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title · Registro de alumnos</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/site.css")" />
+</head>
+<body>
+    <header class="topbar"><div class="shell topbar-inner">
+        <a class="brand" href="@Url.Action("Index", "Alumno")">Registro de alumnos</a>
+        <span class="badge">POO I · T2</span>
+    </div></header>
+    <main class="shell">
+        @if (TempData["Mensaje"] != null)
+        {
+            <div id="mensaje" class="alert success" role="status">@TempData["Mensaje"]</div>
+        }
+        @RenderBody()
+    </main>
+    <footer class="shell footer">Henry Santiago Cruz Alcas · Cibertec</footer>
+    <script src="@Url.Content("~/Scripts/site.js")"></script>
+</body>
+</html>

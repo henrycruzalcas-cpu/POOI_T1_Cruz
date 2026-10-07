@@ -1,0 +1,43 @@
+@model POOI_T2_CruzAlcas.Models.Alumno[]
+@{ ViewBag.Title = "Alumnos"; }
+<section class="heading">
+    <div><p class="eyebrow">GESTIÓN ACADÉMICA</p><h1>Alumnos</h1><p class="muted">Consulta y administra los alumnos registrados.</p></div>
+    <a class="button primary" href="@Url.Action("Agregar")">+ Agregar alumno</a>
+</section>
+<section class="card">
+    <div class="card-head"><h2>Listado <span class="counter">@Model.Length</span></h2>
+        @using (Html.BeginForm("Serializar", "Alumno", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="button secondary">Guardar JSON</button>
+        }
+    </div>
+    @if (Model.Length == 0)
+    {
+        <div class="empty"><h2>Aún no hay alumnos</h2><p>Agrega el primer alumno para comenzar.</p><a href="@Url.Action("Agregar")">Registrar alumno</a></div>
+    }
+    else
+    {
+        <div class="table-wrap"><table>
+            <thead><tr><th>DNI</th><th>Nombres</th><th>Apellidos</th><th>Carrera</th><th>Ciclo</th><th>Acciones</th></tr></thead>
+            <tbody>
+            @foreach (var alumno in Model)
+            {
+                <tr>
+                    <td class="dni">@alumno.dni</td><td>@alumno.nombres</td><td>@alumno.apellidos</td><td>@alumno.carrera</td><td>@alumno.ciclo</td>
+                    <td><div class="actions">
+                        <a href="@Url.Action("Detalles", new { dni = alumno.dni })">Detalles</a>
+                        <a href="@Url.Action("Actualizar", new { dni = alumno.dni })">Actualizar</a>
+                        @using (Html.BeginForm("Eliminar", "Alumno", FormMethod.Post, new { @class = "delete-form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="dni" value="@alumno.dni" />
+                            <button type="submit" class="text-danger">Eliminar</button>
+                        }
+                    </div></td>
+                </tr>
+            }
+            </tbody>
+        </table></div>
+    }
+</section>

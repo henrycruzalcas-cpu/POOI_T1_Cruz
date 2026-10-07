@@ -1,0 +1,12 @@
+@model POOI_T2_CruzAlcas.Models.Alumno
+@{ ViewBag.Title = "Agregar alumno"; }
+<a class="back" href="@Url.Action("Index")">← Volver al listado</a>
+<section class="heading"><div><p class="eyebrow">NUEVO REGISTRO</p><h1>Agregar alumno</h1><p class="muted">Todos los campos son obligatorios. El DNI debe ser único.</p></div></section>
+<section class="card form-card">
+    @using (Html.BeginForm("Agregar", "Alumno", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Partial("_Formulario", Model)
+        <div class="form-actions"><button type="submit" class="button primary">Guardar alumno</button><a class="button secondary" href="@Url.Action("Index")">Cancelar</a></div>
+    }
+</section>

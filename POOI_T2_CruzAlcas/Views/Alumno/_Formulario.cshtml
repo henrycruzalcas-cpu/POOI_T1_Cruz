@@ -1,0 +1,29 @@
+@model POOI_T2_CruzAlcas.Models.Alumno
+@Html.ValidationSummary(true, "", new { @class = "validation-summary" })
+<div class="form-grid">
+    <div class="field">
+        @Html.LabelFor(m => m.dni)
+        @Html.TextBoxFor(m => m.dni, new { maxlength = "8", inputmode = "numeric", pattern = "[0-9]{8}", required = "required", autocomplete = "off" })
+        @Html.ValidationMessageFor(m => m.dni)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.ciclo)
+        @Html.TextBoxFor(m => m.ciclo, new { type = "number", min = "1", max = "10", required = "required" })
+        @Html.ValidationMessageFor(m => m.ciclo)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.nombres)
+        @Html.TextBoxFor(m => m.nombres, new { maxlength = "80", required = "required" })
+        @Html.ValidationMessageFor(m => m.nombres)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.apellidos)
+        @Html.TextBoxFor(m => m.apellidos, new { maxlength = "100", required = "required" })
+        @Html.ValidationMessageFor(m => m.apellidos)
+    </div>
+    <div class="field full">
+        @Html.LabelFor(m => m.carrera)
+        @Html.TextBoxFor(m => m.carrera, new { maxlength = "120", required = "required" })
+        @Html.ValidationMessageFor(m => m.carrera)
+    </div>
+</div>
