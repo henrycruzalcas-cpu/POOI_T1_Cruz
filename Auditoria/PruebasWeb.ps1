@@ -1,4 +1,5 @@
 $ErrorActionPreference = 'Stop'
+Import-Module Microsoft.PowerShell.Utility
 $root = Split-Path $PSScriptRoot -Parent
 $app = Join-Path $root 'POOI_T2_CruzAlcas'
 $json = Join-Path $app 'App_Data\alumnos.json'
