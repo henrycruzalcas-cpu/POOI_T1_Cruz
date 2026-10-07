@@ -6,13 +6,15 @@ Fecha: 6 de octubre de 2026 (Perú).
 
 - Compilación de la solución en Windows con MSBuild y .NET Framework: correcta.
 - Precompilación de todas las vistas Razor con aspnet_compiler: correcta.
-- 22 comprobaciones de las operaciones JSON: correctas, también en Windows.
+- 22 comprobaciones de las operaciones JSON: correctas en Windows.
+- 16 comprobaciones HTTP contra la aplicación ejecutada en IIS Express: correctas.
+- Total: 38 comprobaciones funcionales correctas, además de la compilación y revisión de archivos.
 - Archivos XML de configuración y referencias del proyecto: correctos.
 - Sintaxis JavaScript: correcta; temporizador del mensaje configurado en 5000 ms.
 - Colección entregada: `[]`, sin datos de prueba.
 - Archivo ZIP: integridad verificada; incluye solución, fuentes y paquetes NuGet.
 
-Evidencia reproducible: [Verificación en GitHub Actions](https://github.com/henrycruzalcas-cpu/POOI_T1_Cruz/actions/runs/37557400039).
+Evidencia reproducible: [Verificación en GitHub Actions](https://github.com/henrycruzalcas-cpu/POOI_T1_Cruz/actions/runs/37557927687).
 
 ## Casos comprobados
 
@@ -20,4 +22,7 @@ Colección vacía, serialización vacía, alta, conservación de ceros del DNI, 
 
 ## Alcance
 
-Se verificaron la compilación del proyecto y las vistas, y la ejecución de la lógica de datos. No se realizó una prueba manual interactiva del navegador ni una ejecución en la laptop del alumno. La entrega en Blackboard no fue realizada por estas pruebas. El README contiene las instrucciones de apertura y una comprobación manual breve.
+Se verificaron la compilación del proyecto y las vistas, la lógica de datos y solicitudes HTTP reales a IIS Express: listado, recursos CSS/JS, formularios, token antifalsificación, alta, duplicados, detalles, actualización, errores de validación, serialización, mensajes, eliminación y respuesta 404. No se realizó una inspección visual manual en navegador ni una ejecución en la laptop del alumno. La entrega en Blackboard no fue realizada por estas pruebas.
+
+La segunda auditoría no encontró errores en la aplicación ni requisitos faltantes frente a la rúbrica proporcionada. Se ajustó únicamente la inicialización del módulo HTTP del verificador. La calificación corresponde al docente; los resultados no constituyen garantía de una nota específica.
+
